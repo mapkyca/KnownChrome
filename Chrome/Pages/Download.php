@@ -75,7 +75,7 @@
 			
 			header('Content-Description: File Transfer');
 			header('Content-Type: application/octet-stream');
-			header('Content-Disposition: attachment; filename="'.basename($archive).'"'); //<<< Note the " " surrounding the file name
+			header('Content-Disposition: attachment; filename="'.basename($archive).'"'); 
 			header('Content-Transfer-Encoding: binary');
 			header('Connection: Keep-Alive');
 			header('Expires: 0');
