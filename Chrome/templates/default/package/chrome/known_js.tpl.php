@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     frame.setAttribute('src', 'http://www.rememberthemilk.com/services/modules/googleig/');
 
-//    document.body.appendChild(frame);
+    document.body.appendChild(frame);
 
     
     
@@ -25,11 +25,7 @@ document.addEventListener('DOMContentLoaded', function () {
     //document.getElementById("iframe").addEventListener('load', resizeIframe);
     
     chrome.tabs.getSelected(null, function(tab) {
-    document.getElementById("content").innerHTML='<object type="text/html" data="' + '<?= \Idno\Core\site()->config()->getDisplayURL(); ?>share?via=ff_social&share_url=' + encodeURIComponent(tab.url) +'&share_title=' + encodeURIComponent(tab.title) + '" ></object>';
+	document.getElementById('iframe').src = '<?= \Idno\Core\site()->config()->getDisplayURL(); ?>share?via=ff_social&share_url=' + encodeURIComponent(tab.url) +'&share_title=' + encodeURIComponent(tab.title);
     });
-    
-   // chrome.tabs.getSelected(null, function(tab) {
-//	document.getElementById('iframe').src = '<?= \Idno\Core\site()->config()->getDisplayURL(); ?>share?via=ff_social&share_url=' + encodeURIComponent(tab.url) +'&share_title=' + encodeURIComponent(tab.title);
-  //  });
 
 });
