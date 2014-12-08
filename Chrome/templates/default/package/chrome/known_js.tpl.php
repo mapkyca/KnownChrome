@@ -14,8 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
     frame.setAttribute('height', '100%');
     frame.setAttribute('frameborder', '0');
     frame.setAttribute('id', 'iframe');
-
-    frame.setAttribute('src', 'http://www.rememberthemilk.com/services/modules/googleig/');
+    frame.setAttribute('crossOrigin', 'use-credentials');
 
     document.body.appendChild(frame);
 
