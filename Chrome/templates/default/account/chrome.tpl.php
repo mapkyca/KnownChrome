@@ -14,7 +14,7 @@
         </p>
 
 	<p>
-	    Once downloaded, open Chrome Settings -> Extensions and enable "Developer mode". Once done, you'll be able to drag the downloaded archive onto the page and activate the extension.
+	    Once downloaded, open Chrome Settings -> Extensions and drag the downloaded archive onto the page.
 	</p>
         <p>
             <a class="btn btn-success" href="/chrome/download">Click here to begin using <?= \Idno\Core\site()->config()->title ?> for
