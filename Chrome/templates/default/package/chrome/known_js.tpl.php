@@ -8,6 +8,7 @@ function resizeIframe() {
 
 document.addEventListener('DOMContentLoaded', function () {
 
+
     var frame = document.createElement('iframe');
     frame.setAttribute('width', '100%');
     frame.setAttribute('height', '100%');
@@ -16,14 +17,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
     frame.setAttribute('src', 'http://www.rememberthemilk.com/services/modules/googleig/');
 
-    document.body.appendChild(frame);
+//    document.body.appendChild(frame);
 
     
     
     frame.addEventListener('load', resizeIframe);
     //document.getElementById("iframe").addEventListener('load', resizeIframe);
     
-    
+    document.getElementById("content").innerHTML='<object type="text/html" data="' + '<?= \Idno\Core\site()->config()->getDisplayURL(); ?>share?via=ff_social&share_url=' + encodeURIComponent(tab.url) +'&share_title=' + encodeURIComponent(tab.title)' + '" ></object>';
     
     
     chrome.tabs.getSelected(null, function(tab) {
