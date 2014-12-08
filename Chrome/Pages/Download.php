@@ -28,7 +28,7 @@
 		// Build manifest
 		file_put_contents($dir . $name . DIRECTORY_SEPARATOR . 'manifest.json', json_encode([
 		    'name' => \Idno\Core\site()->config()->title,
-		    'description' => 'Chrome plugin for Known',
+		    'description' => 'Chrome plugin for Known on ' . \Idno\Core\site()->config()->title,
 		    'author' => 'Marcus Povey <marcus@marcus-povey.co.uk>',
 		    'version' => '0.1',
 		    'manifest_version' => 2,
