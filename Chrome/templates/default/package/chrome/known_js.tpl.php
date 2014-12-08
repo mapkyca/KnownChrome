@@ -3,7 +3,7 @@ function resizeIframe(obj) {
 }
 
 chrome.tabs.getSelected(null, function(tab) {
-    document.getElementById('iframe').src = '<?= \Idno\Core\site()->config()->getDisplayURL(); ?>chrome/share?share_url=' + encodeURIComponent(tab.url) +'&share_title=' + encodeURIComponent(tab.title);
+    document.getElementById('iframe').src = '<?= \Idno\Core\site()->config()->getDisplayURL(); ?>chrome/share?via=ff_social&share_url=' + encodeURIComponent(tab.url) +'&share_title=' + encodeURIComponent(tab.title);
 });
 
 javascript:resizeIframe(document.getElementById('iframe'));
