@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function () {
     frame.addEventListener('load', resizeIframe);
     //document.getElementById("iframe").addEventListener('load', resizeIframe);
     
-    document.getElementById("content").innerHTML='<object type="text/html" data="' + '<?= \Idno\Core\site()->config()->getDisplayURL(); ?>share?via=ff_social&share_url=' + encodeURIComponent(tab.url) +'&share_title=' + encodeURIComponent(tab.title)' + '" ></object>';
+    document.getElementById("content").innerHTML='<object type="text/html" data="' + '<?= \Idno\Core\site()->config()->getDisplayURL(); ?>share?via=ff_social&share_url=' + encodeURIComponent(tab.url) +'&share_title=' + encodeURIComponent(tab.title) + '" ></object>';
     
     
     chrome.tabs.getSelected(null, function(tab) {
