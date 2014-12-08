@@ -6,4 +6,3 @@ chrome.tabs.getSelected(null, function(tab) {
     document.getElementById('iframe').src = '<?= \Idno\Core\site()->config()->getDisplayURL(); ?>share?via=ff_social&share_url=' + encodeURIComponent(tab.url) +'&share_title=' + encodeURIComponent(tab.title);
 });
 
-javascript:resizeIframe(document.getElementById('iframe'));

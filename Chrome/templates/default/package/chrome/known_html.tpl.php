@@ -16,7 +16,7 @@
     </head>
     <body>
 	<div id="content">
-	    <iframe id="iframe" src="<?= \Idno\Core\site()->config()->getDisplayURL(); ?>share" style="border: 0; width: 100%; height: 100%" frameborder="0" scrolling="no" >Your browser doesn't support iframes</iframe>
+	    <iframe id="iframe" src="<?= \Idno\Core\site()->config()->getDisplayURL(); ?>share" style="border: 0; width: 100%; height: 100%" frameborder="0" scrolling="no" onload="javascript:resizeIframe(document.getElementById('iframe'));">Your browser doesn't support iframes</iframe>
 	</div>
     </body>
 </html>
