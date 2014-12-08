@@ -8,6 +8,7 @@ function resizeIframe() {
 
 document.addEventListener('DOMContentLoaded', function () {
 
+    document.domain = '<?= \Idno\Core\site()->config()->host; ?>';
 
     var frame = document.createElement('iframe');
     frame.setAttribute('width', '100%');
