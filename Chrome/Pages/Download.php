@@ -34,7 +34,7 @@
 		    'manifest_version' => 2,
 		    
 		    'permissions' => [
-			\Idno\Core\site()->config()->getDisplayURL(),
+			'*://'.\Idno\Core\site()->config()->host.'/*',
 			'tabs'
 		    ],
 		    
