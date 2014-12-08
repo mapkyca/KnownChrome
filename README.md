@@ -17,6 +17,7 @@ Installation
 * Log into known and click on Administration.
 * Click "install" on the plugins page
 
+Once activated you can download a custom Chrome application for your site. To install this you will need to open **Chrome settings->Extensions** and then drag the archive file onto it.
 
 See
 ---
