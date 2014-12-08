@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
     <head>
 	<title><?= \Idno\Core\site()->config()->title; ?></title>
