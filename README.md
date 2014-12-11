@@ -3,7 +3,7 @@ Chrome application for Known
 
 This plugin provides a Chrome application for Known. 
 
-The Chrome application adds an icon to the Chrome toolbar that accesses the Known page sharing API. 
+The Chrome application adds an icon to the Chrome toolbar that accesses the Known page sharing API, without ever taking you off the page.
 This is handy for those who don't want to enable the bookmark bar or use the bookmarklet for whatever reason.
 
 The plugin mimics the behaviour of the official Firefox plugin.
