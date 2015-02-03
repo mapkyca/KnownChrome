@@ -58,12 +58,70 @@
                     throw new \Exception('Phar archive extension not installed');
                 }
 		
-		$filename = str_replace('.','_',\Idno\Core\site()->config()->host)."_for_chrome.zip";
+		\Idno\Core\site()->session()->addErrorMessage("OpenSSL is not installed, so I couldn't generate a CRX file, returing installable .zip instead.");
+		    
+		$filename = str_replace('.','_',\Idno\Core\site()->config()->host)."_for_chrome";
+
+		$archive = new \PharData($dir . $filename . '.zip');
+		$archive->buildFromDirectory($dir . $name . DIRECTORY_SEPARATOR);
 		
-		$archive = new \PharData($dir . $filename);
-                $archive->buildFromDirectory($dir . $name . DIRECTORY_SEPARATOR);
-		
-		return $archive->getPath();
+		if (!is_callable('openssl_pkey_new')) {
+		    
+		    return $archive->getPath();
+		} else {
+		    // Generate a CRX (https://stackoverflow.com/questions/5013263/create-google-chrome-crx-file-with-php)
+		 
+		    // Build new keypair
+		    $keypair = openssl_pkey_new(array(
+			"private_key_bits" => 2048,
+			"private_key_type" => OPENSSL_KEYTYPE_RSA,
+		    ));
+		    
+		    if (!openssl_pkey_export($keypair, $keypair_pem))
+			    throw new \Exception("Could not generate keypair");
+		    
+		    // Output pem
+		    file_put_contents($dir."$name.pem", $keypair_pem);
+		    
+		    // Get public key
+		    $pubkey=openssl_pkey_get_details($keypair);
+		    $pubkey=$pubkey["key"];
+		    
+		    // Output pubkey in DER format
+		    file_put_contents($dir."$name.der", \IdnoPlugins\Chrome\Main::pem2der($pubkey));
+		    
+		    // Sign archive
+		    $pk = openssl_pkey_get_private(file_get_contents($dir."$name.pem"));
+		    openssl_sign(file_get_contents($archive->getPath()), $signature, $pk, OPENSSL_ALGO_SHA1);
+		    openssl_free_key($pk);
+		    
+		    # decode the public key
+		    $pubkey = file_get_contents($dir."$name.der");//base64_decode(file_get_contents($dir."$name.pub"));
+		    
+		    # .crx package format:
+		    #
+		    #   magic number               char(4)
+		    #   crx format ver             byte(4)
+		    #   pub key lenth              byte(4)
+		    #   signature length           byte(4)
+		    #   public key                 string
+		    #   signature                  string
+		    #   package contents, zipped   string
+		    #
+		    # see http://code.google.com/chrome/extensions/crx.html
+		    #
+		    $fh = fopen($dir . $filename . '.crx', 'wb');
+		    fwrite($fh, 'Cr24');                             // extension file magic number
+		    fwrite($fh, pack('V', 2));                       // crx format version
+		    fwrite($fh, pack('V', strlen($pubkey)));            // public key length
+		    fwrite($fh, pack('V', strlen($signature)));      // signature length
+		    fwrite($fh, $pubkey);                               // public key
+		    fwrite($fh, $signature);                         // signature
+		    fwrite($fh, file_get_contents($dir . $filename . '.zip')); // package contents, zipped
+		    fclose($fh);
+		    
+		    return $dir . $filename . '.crx';
+		}
 	    }
 	    
             function getContent()

@@ -16,20 +16,14 @@ namespace IdnoPlugins\Chrome {
 	    \Idno\Core\site()->template()->extendTemplate('account/menu/items', 'account/chrome/menu');
 	}
 
-	/** DER/PEM conversion from https://php.net/manual/en/ref.openssl.php#74188 */
+	/** DER/PEM conversion (modified from https://php.net/manual/en/ref.openssl.php#74188 ) */
 	static function pem2der($pem_data) {
-	    $begin = "CERTIFICATE-----";
+	    $begin = "KEY-----";
 	    $end = "-----END";
 	    $pem_data = substr($pem_data, strpos($pem_data, $begin) + strlen($begin));
 	    $pem_data = substr($pem_data, 0, strpos($pem_data, $end));
 	    $der = base64_decode($pem_data);
 	    return $der;
-	}
-
-	static function der2pem($der_data) {
-	    $pem = chunk_split(base64_encode($der_data), 64, "\n");
-	    $pem = "-----BEGIN CERTIFICATE-----\n" . $pem . "-----END CERTIFICATE-----\n";
-	    return $pem;
 	}
 
 	/*	 * **** */
