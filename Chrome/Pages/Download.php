@@ -66,14 +66,14 @@
                     throw new \Exception('Phar archive extension not installed');
                 }
 		
-		\Idno\Core\site()->session()->addErrorMessage("OpenSSL is not installed, so I couldn't generate a CRX file, returing installable .zip instead.");
-		    
 		$filename = str_replace('.','_',\Idno\Core\site()->config()->host)."_for_chrome";
 
 		$archive = new \PharData($dir . $filename . '.zip');
 		$archive->buildFromDirectory($dir . $name . DIRECTORY_SEPARATOR);
 		
 		if (!is_callable('openssl_pkey_new')) {
+		
+		    \Idno\Core\site()->session()->addErrorMessage("OpenSSL is not installed, so I couldn't generate a CRX file, returing installable .zip instead.");
 		    
 		    return $archive->getPath();
 		} else {
