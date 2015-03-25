@@ -49,8 +49,16 @@
 		file_put_contents($dir . $name . DIRECTORY_SEPARATOR . 'known.html', $t->draw('package/chrome/known_html'));
 		file_put_contents($dir . $name . DIRECTORY_SEPARATOR . 'known.js', $t->draw('package/chrome/known_js'));
 		
-		// Icons
-		file_put_contents($dir . $name . DIRECTORY_SEPARATOR . 'known.png', file_get_contents(\Idno\Core\site()->config()->getDisplayURL() . 'gfx/logos/logo_k_64.png')); // TODO: Do this better once a site icon method is available
+		// Icons	
+		if ($site_icons = \Idno\Core\site()->getSiteIcons()) {
+		    $logo = $site_icons['default_64'];
+		}
+		if (!$logo) {
+		    $logo = \Idno\Core\site()->config()->getDisplayURL() . 'gfx/logos/logo_k_64.png';
+		}
+		if (!file_put_contents($dir . $name . DIRECTORY_SEPARATOR . 'known.png', file_get_contents($logo))) {
+		    throw new \Exception("Known.png could not be generated from $logo");
+		}
 		
 		
 		// Build zip
