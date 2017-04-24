@@ -51,7 +51,7 @@
 		
 		// Icons	
 		if ($site_icons = \Idno\Core\site()->getSiteIcons()) {
-		    $logo = $site_icons['default_64'];
+		    $logo = $site_icons['defaults']['default_64'];
 		}
 		if (!$logo) {
 		    $logo = \Idno\Core\site()->config()->getDisplayURL() . 'gfx/logos/logo_k_64.png';
