@@ -30,8 +30,11 @@
 		    'name' => \Idno\Core\site()->config()->title,
 		    'description' => 'Chrome plugin for Known on ' . \Idno\Core\site()->config()->title,
 		    'author' => 'Marcus Povey <marcus@marcus-povey.co.uk>',
-		    'version' => '0.1',
+		    'version' => '1.1',
 		    'manifest_version' => 2,
+		    
+		    "run_at" => "document_start",
+		    'all_frames' => true,
 		    
 		    'permissions' => [
 			'*://'.\Idno\Core\site()->config()->host.'/*',
@@ -41,7 +44,7 @@
 		    'browser_action' => [
 			'default_icon' => 'known.png',
 			'default_popup' => 'known.html'
-		    ]
+		    ],
 		]));
 		
 		// Build popup
